@@ -1,0 +1,136 @@
+{
+  "passed": 32,
+  "failed": 0,
+  "total": 32,
+  "duration_s": 4.55,
+  "cases": [
+    {
+      "name": "test_parse_solar_demo_pdf",
+      "outcome": "passed"
+    },
+    {
+      "name": "test_citation_regex_matches_cap_and_profile",
+      "outcome": "passed"
+    },
+    {
+      "name": "test_citation_regex_rejects_fabricated_ids",
+      "outcome": "passed"
+    },
+    {
+      "name": "test_unsupported_extension_raises",
+      "outcome": "passed"
+    },
+    {
+      "name": "test_date_dd_month_yyyy",
+      "outcome": "passed"
+    },
+    {
+      "name": "test_date_month_dd_yyyy",
+      "outcome": "passed"
+    },
+    {
+      "name": "test_date_iso_passthrough",
+      "outcome": "passed"
+    },
+    {
+      "name": "test_date_slashed",
+      "outcome": "passed"
+    },
+    {
+      "name": "test_date_garbage_returns_none",
+      "outcome": "passed"
+    },
+    {
+      "name": "test_pkr_millions",
+      "outcome": "passed"
+    },
+    {
+      "name": "test_pkr_billions",
+      "outcome": "passed"
+    },
+    {
+      "name": "test_pkr_crore",
+      "outcome": "passed"
+    },
+    {
+      "name": "test_pkr_lakh",
+      "outcome": "passed"
+    },
+    {
+      "name": "test_pkr_none_for_no_amount",
+      "outcome": "passed"
+    },
+    {
+      "name": "test_percent_extraction",
+      "outcome": "passed"
+    },
+    {
+      "name": "test_solar_query_hits_solar_caps",
+      "outcome": "passed"
+    },
+    {
+      "name": "test_results_sorted_by_score",
+      "outcome": "passed"
+    },
+    {
+      "name": "test_topk_respected",
+      "outcome": "passed"
+    },
+    {
+      "name": "test_evidence_shape",
+      "outcome": "passed"
+    },
+    {
+      "name": "test_requirement_rejects_too_short_text",
+      "outcome": "passed"
+    },
+    {
+      "name": "test_requirement_defaults",
+      "outcome": "passed"
+    },
+    {
+      "name": "test_profile_unknown_sector_falls_back",
+      "outcome": "passed"
+    },
+    {
+      "name": "test_profile_known_sector_kept",
+      "outcome": "passed"
+    },
+    {
+      "name": "test_match_result_rejects_bad_status",
+      "outcome": "passed"
+    },
+    {
+      "name": "test_match_result_rejects_out_of_range_confidence",
+      "outcome": "passed"
+    },
+    {
+      "name": "test_higher_compliance_raises_estimate",
+      "outcome": "passed"
+    },
+    {
+      "name": "test_mandatory_gaps_lower_estimate",
+      "outcome": "passed"
+    },
+    {
+      "name": "test_budget_alignment_peaks_at_won_median",
+      "outcome": "passed"
+    },
+    {
+      "name": "test_unknown_budget_is_neutral",
+      "outcome": "passed"
+    },
+    {
+      "name": "test_compliance_summary_math",
+      "outcome": "passed"
+    },
+    {
+      "name": "test_trained_model_quality_gate",
+      "outcome": "passed"
+    },
+    {
+      "name": "test_ablation_is_persisted_for_honesty",
+      "outcome": "passed"
+    }
+  ]
+}

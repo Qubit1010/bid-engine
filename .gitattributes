@@ -1,0 +1,10 @@
+# Binary assets must check out byte-identical on every platform —
+# the offline demo cache keys derive from text extracted from these files.
+*.pdf binary
+*.docx binary
+*.xlsx binary
+*.joblib binary
+*.npz binary
+*.npy binary
+*.png binary
+*.ico binary

@@ -1,0 +1,21 @@
+{
+  "description": "Evaluation criteria taxonomy - 16 common RFP evaluation criteria by sector. Synthesized by the team because the provided sample dataset omitted the taxonomy sheet referenced in the problem statement.",
+  "criteria": [
+    {"id": "TC-01", "name": "Technical Approach & Methodology", "sectors": ["All"], "typical_weight_pct": 25, "description": "Soundness, completeness and innovation of the proposed technical solution and delivery methodology."},
+    {"id": "TC-02", "name": "Relevant Past Experience", "sectors": ["All"], "typical_weight_pct": 15, "description": "Evidence of successfully delivered projects of similar scope, scale and sector."},
+    {"id": "TC-03", "name": "Financial Proposal / Cost", "sectors": ["All"], "typical_weight_pct": 20, "description": "Total cost of ownership, price realism and value for money."},
+    {"id": "TC-04", "name": "Key Personnel Qualifications", "sectors": ["All"], "typical_weight_pct": 10, "description": "CVs, certifications and availability of the proposed team."},
+    {"id": "TC-05", "name": "Project Timeline & Work Plan", "sectors": ["All"], "typical_weight_pct": 8, "description": "Realistic, milestone-based schedule with resource loading."},
+    {"id": "TC-06", "name": "Quality Assurance Plan", "sectors": ["Construction", "IT Services", "Energy"], "typical_weight_pct": 5, "description": "QA/QC processes, inspection regimes and acceptance criteria."},
+    {"id": "TC-07", "name": "Certifications & Standards Compliance", "sectors": ["All"], "typical_weight_pct": 5, "description": "ISO 9001/27001, CMMI, CE Mark, PEC registration and other mandated standards."},
+    {"id": "TC-08", "name": "Financial Stability", "sectors": ["All"], "typical_weight_pct": 5, "description": "Audited statements, turnover thresholds, bank guarantees and bid security."},
+    {"id": "TC-09", "name": "Local Presence & Support Capability", "sectors": ["IT Services", "Telecom", "Logistics", "Healthcare"], "typical_weight_pct": 4, "description": "In-country offices, support SLAs and spare/parts logistics."},
+    {"id": "TC-10", "name": "Risk Management Plan", "sectors": ["Construction", "Energy", "Finance"], "typical_weight_pct": 4, "description": "Identification, mitigation and contingency planning for delivery risks."},
+    {"id": "TC-11", "name": "Health, Safety & Environment (HSE)", "sectors": ["Construction", "Energy", "Logistics"], "typical_weight_pct": 5, "description": "HSE policy, incident record and site safety management."},
+    {"id": "TC-12", "name": "Data Security & Privacy", "sectors": ["IT Services", "Finance", "Healthcare", "Telecom"], "typical_weight_pct": 6, "description": "Information security controls, data residency and privacy compliance."},
+    {"id": "TC-13", "name": "Training & Knowledge Transfer", "sectors": ["IT Services", "Education", "Healthcare"], "typical_weight_pct": 4, "description": "End-user training plans, documentation and capacity building."},
+    {"id": "TC-14", "name": "Warranty & Post-Implementation Support", "sectors": ["All"], "typical_weight_pct": 5, "description": "Warranty period, support tiers, response times and maintenance terms."},
+    {"id": "TC-15", "name": "Innovation & Value Addition", "sectors": ["All"], "typical_weight_pct": 3, "description": "Differentiated capabilities, automation or value-added services beyond the base scope."},
+    {"id": "TC-16", "name": "Sustainability & Environmental Impact", "sectors": ["Construction", "Energy", "Logistics"], "typical_weight_pct": 3, "description": "Environmental footprint, green materials/energy and social impact."}
+  ]
+}

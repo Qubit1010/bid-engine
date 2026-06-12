@@ -1,0 +1,17 @@
+{
+  "mean_score": 71.48,
+  "mean_compliance": 78.65,
+  "overall_win_rate": 0.5667,
+  "sector_win_rate": {
+    "Construction": 0.5652,
+    "Education": 0.4286,
+    "Energy": 0.65,
+    "Finance": 0.5385,
+    "Healthcare": 0.5455,
+    "IT Services": 0.5,
+    "Logistics": 0.6,
+    "Telecom": 0.6471
+  },
+  "won_budget_median_m": 313.5,
+  "won_budget_iqr_m": 243.8
+}

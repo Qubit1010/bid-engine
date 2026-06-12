@@ -1,0 +1,32 @@
+{
+  "id": "CO-PROFILE",
+  "note": "Structured organization-level fact sheet. Complements the 50 project records in the capability library: administrative and financial requirements are judged against these facts. Synthesized for the prototype to represent the bidding organization.",
+  "company": {
+    "legal_name": "TechnoCore Engineering (Pvt) Ltd",
+    "established": 2012,
+    "registrations": [
+      "SECP incorporated (Pvt Ltd)",
+      "FBR National Tax Number with Active Taxpayer (ATL) status",
+      "Punjab & Sindh sales tax registered"
+    ],
+    "certifications_held": ["ISO 9001", "ISO 27001", "CMMI L3", "PMP-certified project managers", "CE Mark (medical equipment line)"],
+    "certifications_not_held": ["ISO 14001", "PEC constructor registration category C-A/C-1", "OHSAS 18001"],
+    "financials": {
+      "avg_annual_turnover_pkr_m": 900,
+      "audited_statements_years": 3,
+      "bank_guarantee_facility_pkr_m": 100,
+      "bid_security_capability": "Can arrange CDR / bank guarantee from scheduled banks up to facility limit"
+    },
+    "people": {
+      "total_staff": 250,
+      "pmp_certified_pms": 6,
+      "pe_registered_engineers": 4,
+      "offices": ["Islamabad (HQ)", "Lahore", "Karachi"]
+    },
+    "delivery_footprint": {
+      "client_types_served": ["Federal Govt", "Provincial Govt", "Private Sector", "International"],
+      "support_model": "In-country support desk with 24-48h response SLAs; quarterly preventive maintenance offered on O&M contracts",
+      "hse": "Documented HSE policy; zero reportable fatalities on record; site safety plans on all infrastructure deployments"
+    }
+  }
+}
