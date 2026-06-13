@@ -4,7 +4,13 @@ import { clsx } from "clsx";
 
 export function Card({ className, children }: { className?: string; children: React.ReactNode }) {
   return (
-    <div className={clsx("rounded-xl border border-ink-700/60 bg-ink-900 p-5", className)}>
+    <div
+      className={clsx(
+        "rounded-xl border border-ink-700/70 bg-ink-900 p-5 transition-all duration-200",
+        "shadow-[0_1px_2px_rgba(30,50,30,0.05),0_14px_34px_-22px_rgba(40,70,40,0.28)]",
+        className,
+      )}
+    >
       {children}
     </div>
   );
@@ -13,8 +19,8 @@ export function Card({ className, children }: { className?: string; children: Re
 export function CardTitle({ children, sub }: { children: React.ReactNode; sub?: string }) {
   return (
     <div className="mb-4">
-      <h3 className="text-sm font-semibold uppercase tracking-wider text-slate-400">{children}</h3>
-      {sub && <p className="mt-1 text-xs text-slate-500">{sub}</p>}
+      <h3 className="text-[15px] font-semibold uppercase tracking-wider text-slate-400">{children}</h3>
+      {sub && <p className="mt-1 text-[13px] text-slate-500">{sub}</p>}
     </div>
   );
 }
@@ -39,7 +45,7 @@ export function Badge({ status, children, className }: {
   return (
     <span
       className={clsx(
-        "inline-flex items-center gap-1 rounded-full px-2.5 py-0.5 text-[11px] font-semibold ring-1",
+        "inline-flex items-center gap-1 rounded-full px-2.5 py-0.5 text-xs font-semibold ring-1",
         STATUS_STYLES[status ?? ""] ?? "bg-ink-800 text-slate-300 ring-ink-700",
         className,
       )}
@@ -61,9 +67,9 @@ export function Button({ onClick, children, variant = "primary", disabled, class
       onClick={onClick}
       disabled={disabled}
       className={clsx(
-        "inline-flex items-center gap-1.5 rounded-lg px-3 py-1.5 text-[13px] font-medium transition-colors disabled:cursor-not-allowed disabled:opacity-40",
-        variant === "primary" && "bg-accent-600 text-white hover:bg-accent-500",
-        variant === "ghost" && "border border-ink-700 bg-transparent text-slate-300 hover:bg-ink-800",
+        "inline-flex cursor-pointer items-center gap-1.5 rounded-lg px-3.5 py-2 text-sm font-medium transition-all duration-150 active:scale-[0.97] disabled:cursor-not-allowed disabled:opacity-40 disabled:active:scale-100",
+        variant === "primary" && "bg-accent-600 font-semibold text-white shadow-sm shadow-accent-600/25 hover:bg-accent-500 hover:shadow-md hover:shadow-accent-600/30",
+        variant === "ghost" && "border border-ink-700 bg-transparent text-slate-300 hover:border-accent-500/40 hover:bg-ink-800 hover:text-slate-200",
         variant === "danger" && "border border-red-500/30 bg-red-500/10 text-red-400 hover:bg-red-500/20",
         className,
       )}
@@ -76,8 +82,8 @@ export function Button({ onClick, children, variant = "primary", disabled, class
 export function Stat({ label, value, accent }: { label: string; value: React.ReactNode; accent?: boolean }) {
   return (
     <div>
-      <div className="text-[11px] font-medium uppercase tracking-wider text-slate-500">{label}</div>
-      <div className={clsx("mt-0.5 font-mono text-lg font-semibold", accent ? "text-accent-400" : "text-slate-100")}>
+      <div className="text-xs font-medium uppercase tracking-wider text-slate-500">{label}</div>
+      <div className={clsx("mt-0.5 font-mono text-xl font-semibold", accent ? "text-accent-400" : "text-slate-100")}>
         {value}
       </div>
     </div>

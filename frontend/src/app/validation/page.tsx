@@ -85,22 +85,22 @@ function ScoreWinCurve({ points }: { points: { score: number; p_win: number }[] 
       {/* gridlines */}
       {[0, 0.5, 1].map((g) => (
         <g key={g}>
-          <line x1={PAD} x2={W - PAD} y1={y(g)} y2={y(g)} stroke="#1e2733" strokeWidth="1" />
-          <text x={PAD - 6} y={y(g) + 3} textAnchor="end" fill="#64748b" fontSize="9" fontFamily="var(--font-mono)">
+          <line x1={PAD} x2={W - PAD} y1={y(g)} y2={y(g)} stroke="var(--chart-grid)" strokeWidth="1" />
+          <text x={PAD - 6} y={y(g) + 3} textAnchor="end" fill="var(--chart-axis)" fontSize="9" fontFamily="var(--font-mono)">
             {(g * 100).toFixed(0)}%
           </text>
         </g>
       ))}
       {[40, 60, 70, 80].filter((s) => s >= minX && s <= maxX).map((s) => (
         <g key={s}>
-          <line x1={x(s)} x2={x(s)} y1={PAD / 2} y2={H - PAD} stroke={s === 70 ? "#fbbf2440" : "#1e2733"} strokeWidth="1" strokeDasharray={s === 70 ? "4 3" : undefined} />
-          <text x={x(s)} y={H - PAD + 14} textAnchor="middle" fill={s === 70 ? "#fbbf24" : "#64748b"} fontSize="9" fontFamily="var(--font-mono)">
+          <line x1={x(s)} x2={x(s)} y1={PAD / 2} y2={H - PAD} stroke={s === 70 ? "var(--chart-threshold)" : "var(--chart-grid)"} strokeWidth="1" strokeDasharray={s === 70 ? "4 3" : undefined} opacity={s === 70 ? 0.55 : 1} />
+          <text x={x(s)} y={H - PAD + 14} textAnchor="middle" fill={s === 70 ? "var(--chart-threshold)" : "var(--chart-axis)"} fontSize="9" fontFamily="var(--font-mono)">
             {s}
           </text>
         </g>
       ))}
-      <path d={path} fill="none" stroke="#60a5fa" strokeWidth="2.5" strokeLinecap="round" />
-      <text x={W - PAD} y={H - PAD + 26} textAnchor="end" fill="#64748b" fontSize="9">
+      <path d={path} fill="none" stroke="var(--chart-line)" strokeWidth="2.5" strokeLinecap="round" />
+      <text x={W - PAD} y={H - PAD + 26} textAnchor="end" fill="var(--chart-axis)" fontSize="9">
         evaluation score →
       </text>
     </svg>
@@ -131,9 +131,9 @@ export default function ValidationPage() {
 
   return (
     <div className="space-y-6">
-      <div>
-        <h1 className="text-2xl font-semibold tracking-tight text-slate-100">Validation & Reliability</h1>
-        <p className="mt-1 text-sm text-slate-400">
+      <div className="animate-in">
+        <h1 className="text-3xl font-semibold tracking-tight text-slate-100">Validation & Reliability</h1>
+        <p className="mt-2 max-w-2xl text-[15px] leading-relaxed text-slate-400">
           Evidence, not claims: live model metrics from stratified cross-validation, the honest
           ablation study, and the automated test suite.
         </p>
@@ -187,6 +187,17 @@ export default function ValidationPage() {
               );
             })}
           </div>
+          <p className="mt-4 border-t border-ink-700/60 pt-3 text-xs leading-relaxed text-slate-500">
+            <span className="font-semibold text-slate-400">Why it isn&apos;t overfitting: </span>
+            these are <span className="font-medium text-slate-400">out-of-fold</span> metrics — every
+            row is scored by a model that never trained on it, so a perfect result reflects
+            generalization across folds, not memorization (the linear model reaching {" "}
+            {m.candidates["logistic_regression"]?.cv_auc.toFixed(2) ?? "~1.0"} on the same folds
+            confirms it). It is near-perfect only because the awarded evaluation score nearly
+            determines the outcome (see ablation). A live bid&apos;s score is not known yet — Stage B
+            estimates it — so production predictions carry that estimate&apos;s uncertainty and are
+            <span className="font-medium text-slate-400"> not 100% confident</span>.
+          </p>
         </Card>
 
         <Card>
@@ -219,6 +230,52 @@ export default function ValidationPage() {
           Evaluation Score → Win Probability
         </CardTitle>
         <ScoreWinCurve points={m.score_win_curve} />
+      </Card>
+
+      {/* Exploratory data analysis */}
+      <Card>
+        <CardTitle sub="Branded figures from eda/generate_eda.py — the evidence behind the model design">
+          Dataset Exploration (EDA)
+        </CardTitle>
+        <div className="grid gap-5 sm:grid-cols-2">
+          {[
+            {
+              src: "/eda/sector_winrate.png",
+              title: "Win rate by sector",
+              caption: "Per-sector win rates across the 120-bid history. Small samples — treat as weak priors, not rules.",
+            },
+            {
+              src: "/eda/corr_heatmap.png",
+              title: "Feature correlation matrix",
+              caption: "Pairwise correlation of the numeric bid features used by the model.",
+            },
+            {
+              src: "/eda/cap_domains.png",
+              title: "Capability records by domain",
+              caption: "50 records across 12 domains form the RAG evidence base the matcher searches.",
+            },
+            {
+              src: "/eda/cap_contract_value.png",
+              title: "Contract value distribution",
+              caption: "Project sizes in the capability library (PKR Million).",
+            },
+            {
+              src: "/eda/cap_client_type.png",
+              title: "Records by client type",
+              caption: "Government, private and international delivery footprint.",
+            },
+          ].map((c) => (
+            <figure key={c.src} className="space-y-2">
+              <div className="overflow-hidden rounded-lg border border-ink-700/70 bg-white">
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img src={c.src} alt={c.title} className="w-full" loading="lazy" />
+              </div>
+              <figcaption className="text-xs leading-relaxed text-slate-500">
+                <span className="font-medium text-slate-400">{c.title}.</span> {c.caption}
+              </figcaption>
+            </figure>
+          ))}
+        </div>
       </Card>
 
       {/* Test suite */}

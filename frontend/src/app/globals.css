@@ -1,26 +1,139 @@
 @import "tailwindcss";
 
+/* Slightly larger base type — every rem-based size scales up ~6% for a more
+   readable, premium feel without touching individual components. */
+html {
+  font-size: 106.25%; /* 16px -> 17px */
+}
+
+/*
+  BidSense — light "Sage" theme.
+  Palette: white base + two greens.
+    #9DC08B sage   -> light accents, fills, gradients, gauge
+    #609966 green  -> primary brand, buttons, active states
+  Text uses darker green-tinted neutrals for legibility on white.
+  Warning/danger statuses keep amber/red (a gap must read as a problem).
+*/
 @theme {
-  --color-ink-950: #060a14;
-  --color-ink-900: #0b1120;
-  --color-ink-850: #101a30;
-  --color-ink-800: #16213a;
-  --color-ink-700: #233252;
-  --color-accent-400: #60a5fa;
-  --color-accent-500: #3b82f6;
-  --color-accent-600: #2563eb;
+  /* Surfaces — light "Sage": greener canvas, white cards float on top. */
+  --color-ink-950: #e9f1dc; /* app canvas — clearly sage-green tinted */
+  --color-ink-900: #ffffff; /* card surface (stays clean white for data contrast) */
+  --color-ink-850: #f6faef; /* elevated surface / inputs */
+  --color-ink-800: #dfecd0; /* chips, subtle fills (greener) */
+  --color-ink-700: #c6d9b2; /* borders (greener) */
+
+  /* Greens */
+  --color-accent-400: #4a7a50; /* readable green TEXT on white (links, numbers) */
+  --color-accent-500: #55895c; /* borders, rings, active, button hover */
+  --color-accent-600: #609966; /* primary brand — button base */
+
+  /* Text — dark sage-tinted neutrals (slate-* names; lower number = darker/stronger). */
+  --color-slate-100: #1c2a1a;
+  --color-slate-200: #243524;
+  --color-slate-300: #303f2c;
+  --color-slate-400: #56654f;
+  --color-slate-500: #647458;
+  --color-slate-600: #7e8e76;
+
+  /* Status text tuned for white background */
+  --color-emerald-400: #128a5e;
+  --color-amber-400: #c2820a;
+  --color-red-400: #d33f3f;
+
   --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
   --font-mono: var(--font-jetbrains), ui-monospace, monospace;
 }
 
+/*
+  Chart-only colors for raw SVG fill/stroke (not Tailwind utilities).
+  These switch with the theme so gauge text / gridlines stay legible.
+*/
+:root {
+  --chart-grid: #e6efdb;       /* gridlines */
+  --chart-axis: #647458;       /* axis labels */
+  --chart-track: #e6efdb;      /* gauge background arc */
+  --chart-value: #1c2a1a;      /* gauge big number */
+  --chart-line: #609966;       /* primary plotted line */
+  --chart-threshold: #c2820a;  /* the ~70 marker */
+  --scrollbar-thumb: #cdd9c0;
+  --scrollbar-thumb-hover: #b9c9a8;
+}
+
+/* =========================================================================
+   DARK "Forest" theme — overrides the same tokens under html.dark.
+   Lower slate number still means stronger text (here: lighter on dark).
+   ========================================================================= */
+html.dark {
+  /* Surfaces — deep forest scale */
+  --color-ink-950: #0b110a; /* app canvas */
+  --color-ink-900: #131c10; /* card surface */
+  --color-ink-850: #172012; /* elevated surface / inputs */
+  --color-ink-800: #1e2a18; /* chips, subtle fills */
+  --color-ink-700: #2c3b24; /* borders */
+
+  /* Greens — pop brighter on dark */
+  --color-accent-400: #9dc08b; /* light green TEXT / links / numbers */
+  --color-accent-500: #7faa6f; /* borders, rings, active, button hover */
+  --color-accent-600: #609966; /* primary brand — button base */
+
+  /* Text — light sage-tinted neutrals */
+  --color-slate-100: #eef3e4;
+  --color-slate-200: #dde7d0;
+  --color-slate-300: #c2d0b4;
+  --color-slate-400: #97a98b;
+  --color-slate-500: #7e8e76;
+  --color-slate-600: #647458;
+
+  /* Status text tuned for dark background */
+  --color-emerald-400: #4cc38a;
+  --color-amber-400: #e0a82e;
+  --color-red-400: #f87171;
+
+  /* Chart colors for dark */
+  --chart-grid: #26331e;
+  --chart-axis: #8a9a80;
+  --chart-track: #233019;
+  --chart-value: #eef3e4;
+  --chart-line: #7dbf83;
+  --chart-threshold: #e0a82e;
+  --scrollbar-thumb: #2c3b24;
+  --scrollbar-thumb-hover: #3a4d2f;
+}
+
 body {
-  background: var(--color-ink-950);
-  color: #e2e8f0;
+  /* layered sage glow over a green-tinted canvas */
+  background:
+    radial-gradient(1100px 560px at 50% -15%, rgba(96, 153, 102, 0.30), transparent 62%),
+    radial-gradient(900px 500px at 100% 100%, rgba(157, 192, 139, 0.22), transparent 60%),
+    var(--color-ink-950);
+  background-attachment: fixed;
+  color: var(--color-slate-300);
   font-feature-settings: "tnum";
+  line-height: 1.55;
+  transition: background-color 0.25s ease, color 0.25s ease;
+}
+
+/* Deeper green glow on the dark canvas */
+html.dark body {
+  background:
+    radial-gradient(1100px 560px at 50% -15%, rgba(96, 153, 102, 0.16), transparent 60%),
+    var(--color-ink-950);
 }
 
 ::selection {
-  background: rgba(59, 130, 246, 0.35);
+  background: rgba(96, 153, 102, 0.22);
+  color: #1c2a1a;
+}
+html.dark ::selection {
+  background: rgba(125, 191, 131, 0.30);
+  color: #eef3e4;
+}
+
+/* Visible, on-brand focus ring for keyboard navigation */
+*:focus-visible {
+  outline: 2px solid var(--color-accent-600);
+  outline-offset: 2px;
+  border-radius: 4px;
 }
 
 .scrollbar-thin::-webkit-scrollbar {
@@ -28,8 +141,11 @@ body {
   height: 6px;
 }
 .scrollbar-thin::-webkit-scrollbar-thumb {
-  background: #233252;
+  background: var(--scrollbar-thumb);
   border-radius: 3px;
+}
+.scrollbar-thin::-webkit-scrollbar-thumb:hover {
+  background: var(--scrollbar-thumb-hover);
 }
 
 @keyframes pulse-soft {
@@ -38,4 +154,38 @@ body {
 }
 .animate-pulse-soft {
   animation: pulse-soft 1.6s ease-in-out infinite;
+}
+
+/* Entrance: subtle fade + rise. Stagger via inline animation-delay. */
+@keyframes fade-in-up {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.animate-in {
+  animation: fade-in-up 0.42s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+/* Skeleton shimmer for loading rows */
+@keyframes shimmer {
+  100% { background-position: -200% 0; }
+}
+.skeleton {
+  background: linear-gradient(
+    90deg,
+    var(--color-ink-800) 25%,
+    var(--color-ink-850) 37%,
+    var(--color-ink-800) 63%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 1.4s ease-in-out infinite;
+  border-radius: 0.5rem;
+}
+
+/* Respect reduced-motion preference */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
 }

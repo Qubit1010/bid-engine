@@ -75,11 +75,11 @@ export default function HomePage() {
 
   return (
     <div className="space-y-8">
-      <div>
-        <h1 className="text-2xl font-semibold tracking-tight text-slate-100">
+      <div className="animate-in">
+        <h1 className="text-3xl font-semibold tracking-tight text-slate-100">
           Bid Workspaces
         </h1>
-        <p className="mt-1 text-sm text-slate-400">
+        <p className="mt-2 max-w-2xl text-[15px] leading-relaxed text-slate-400">
           Upload an RFP, RFQ or tender document. BidSense extracts requirements, checks
           compliance against your capability library, scores win probability and drafts the response.
         </p>
@@ -91,10 +91,10 @@ export default function HomePage() {
         onDragLeave={() => setDragOver(false)}
         onDrop={onDrop}
         onClick={() => !uploading && fileInput.current?.click()}
-        className={`group relative flex cursor-pointer flex-col items-center justify-center rounded-2xl border-2 border-dashed px-6 py-14 transition-colors ${
+        className={`group relative flex cursor-pointer flex-col items-center justify-center rounded-2xl border-2 border-dashed px-6 py-14 transition-all duration-200 animate-in active:scale-[0.99] ${
           dragOver
-            ? "border-accent-500 bg-accent-500/5"
-            : "border-ink-700 bg-ink-900/50 hover:border-ink-700 hover:bg-ink-900"
+            ? "scale-[1.01] border-accent-500 bg-accent-500/10 shadow-[0_0_44px_-6px_rgba(96,153,102,0.45)_inset]"
+            : "border-ink-700 bg-ink-900/40 hover:border-accent-500/50 hover:bg-ink-900 hover:shadow-[0_0_36px_-12px_rgba(96,153,102,0.30)_inset]"
         }`}
       >
         <input
@@ -149,14 +149,15 @@ export default function HomePage() {
         </Card>
       ) : (
         <div className="space-y-3">
-          {workspaces.map((ws) => {
+          {workspaces.map((ws, i) => {
             const running = RUNNING_STATUSES.includes(ws.status);
             const decision = ws.winprob?.decision?.decision;
             return (
               <Link
                 key={ws.id}
                 href={`/workspace/${ws.id}`}
-                className="group flex items-center gap-4 rounded-xl border border-ink-700/60 bg-ink-900 px-5 py-4 transition-colors hover:border-accent-500/40 hover:bg-ink-800/60"
+                style={{ animationDelay: `${Math.min(i, 8) * 45}ms` }}
+                className="group flex animate-in items-center gap-4 rounded-xl border border-ink-700/60 bg-ink-900 px-5 py-4 shadow-[0_1px_2px_rgba(40,70,40,0.04)] transition-all duration-200 hover:-translate-y-0.5 hover:border-accent-500/50 hover:bg-ink-850 hover:shadow-[0_10px_28px_-14px_rgba(96,153,102,0.45)]"
               >
                 <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-ink-800 text-slate-400">
                   <FileText size={18} />
@@ -190,10 +191,10 @@ export default function HomePage() {
                 </div>
                 {ws.winprob && (
                   <div className="hidden text-right sm:block">
-                    <div className="font-mono text-lg font-semibold text-accent-400">
+                    <div className="font-mono text-xl font-semibold text-accent-400">
                       {(ws.winprob.probability * 100).toFixed(0)}%
                     </div>
-                    <div className="text-[10px] uppercase tracking-wider text-slate-500">
+                    <div className="text-[11px] uppercase tracking-wider text-slate-500">
                       P(win)
                     </div>
                   </div>

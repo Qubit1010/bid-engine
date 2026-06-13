@@ -25,6 +25,9 @@ frontend/out/
 frontend/next-env.d.ts
 *.tsbuildinfo
 
+# --- generated exports (one-off pipeline output, regenerated per run) ---
+demo-assets/proposal_ws_*.docx
+
 # --- editor / os ---
 .DS_Store
 Thumbs.db

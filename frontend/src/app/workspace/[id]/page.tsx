@@ -74,14 +74,14 @@ export default function WorkspacePage({ params }: { params: Promise<{ id: string
           <Link href="/" className="mb-2 inline-flex items-center gap-1 text-xs text-slate-500 hover:text-slate-300">
             <ArrowLeft size={12} /> Workspaces
           </Link>
-          <h1 className="flex items-center gap-3 text-xl font-semibold text-slate-100">
+          <h1 className="flex items-center gap-3 text-2xl font-semibold text-slate-100">
             {ws.name}
             {decision && ws.status === "ready" && (
               <Badge status={decision}>{decision.replace(/_/g, " ")}</Badge>
             )}
             {ws.status === "error" && <Badge status="error">pipeline error</Badge>}
           </h1>
-          <p className="mt-1 flex items-center gap-2 text-xs text-slate-500">
+          <p className="mt-1 flex items-center gap-2 text-[13px] text-slate-500">
             <FileText size={12} /> {ws.filename}
             {ws.profile?.issuer && <> · {ws.profile.issuer}</>}
           </p>
@@ -116,15 +116,15 @@ export default function WorkspacePage({ params }: { params: Promise<{ id: string
       {/* Tabs */}
       {ws.status === "ready" && (
         <>
-          <div className="flex gap-1 border-b border-ink-700/60">
+          <div className="flex gap-1 overflow-x-auto border-b border-ink-700/60">
             {TABS.map((t) => (
               <button
                 key={t}
                 onClick={() => setTab(t)}
-                className={`-mb-px border-b-2 px-3.5 py-2 text-[13px] font-medium transition-colors ${
+                className={`-mb-px shrink-0 cursor-pointer rounded-t-md border-b-2 px-4 py-2.5 text-sm font-medium transition-all duration-150 ${
                   tab === t
                     ? "border-accent-500 text-slate-100"
-                    : "border-transparent text-slate-500 hover:text-slate-300"
+                    : "border-transparent text-slate-500 hover:bg-ink-800/60 hover:text-slate-300"
                 }`}
               >
                 {t}
@@ -132,11 +132,13 @@ export default function WorkspacePage({ params }: { params: Promise<{ id: string
             ))}
           </div>
 
-          {tab === "Overview" && <OverviewTab ws={ws} />}
-          {tab === "Requirements" && <RequirementsTab ws={ws} onChanged={load} />}
-          {tab === "Compliance" && <ComplianceTab ws={ws} />}
-          {tab === "Draft" && <DraftTab ws={ws} onChanged={load} />}
-          {tab === "Win Probability" && <WinProbTab ws={ws} />}
+          <div key={tab} className="animate-in">
+            {tab === "Overview" && <OverviewTab ws={ws} />}
+            {tab === "Requirements" && <RequirementsTab ws={ws} onChanged={load} />}
+            {tab === "Compliance" && <ComplianceTab ws={ws} />}
+            {tab === "Draft" && <DraftTab ws={ws} onChanged={load} />}
+            {tab === "Win Probability" && <WinProbTab ws={ws} />}
+          </div>
         </>
       )}
     </div>

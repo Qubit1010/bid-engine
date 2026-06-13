@@ -10,7 +10,7 @@ export function ProbabilityGauge({ probability, decision }: {
 }) {
   const pct = Math.max(0, Math.min(1, probability));
   const color =
-    decision === "GO" ? "#34d399" : decision === "CONDITIONAL_GO" ? "#fbbf24" : "#f87171";
+    decision === "GO" ? "#609966" : decision === "CONDITIONAL_GO" ? "#c2820a" : "#d33f3f";
   // semicircle: r=80, circumference of half-circle = PI * r
   const r = 80;
   const half = Math.PI * r;
@@ -20,7 +20,7 @@ export function ProbabilityGauge({ probability, decision }: {
         <path
           d="M 20 110 A 80 80 0 0 1 180 110"
           fill="none"
-          stroke="#1e2733"
+          stroke="var(--chart-track)"
           strokeWidth="14"
           strokeLinecap="round"
         />
@@ -33,11 +33,11 @@ export function ProbabilityGauge({ probability, decision }: {
           strokeDasharray={`${pct * half} ${half}`}
           style={{ transition: "stroke-dasharray 0.8s ease" }}
         />
-        <text x="100" y="92" textAnchor="middle" fill="#f1f5f9"
+        <text x="100" y="92" textAnchor="middle" fill="var(--chart-value)"
           fontSize="34" fontWeight="700" fontFamily="var(--font-mono)">
           {(pct * 100).toFixed(0)}%
         </text>
-        <text x="100" y="112" textAnchor="middle" fill="#64748b"
+        <text x="100" y="112" textAnchor="middle" fill="var(--chart-axis)"
           fontSize="11" fontWeight="600" letterSpacing="1.5">
           P(WIN)
         </text>
